@@ -1,6 +1,7 @@
 CREATE TABLE students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(30) UNIQUE NOT NULL,
+    group_id INTEGER,
     FOREIGN KEY (group_id) REFERENCES groups (id)
       ON DELETE SET NULL
       ON UPDATE CASCADE
@@ -8,17 +9,18 @@ CREATE TABLE students (
 
 CREATE TABLE groups (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(20) UNIQUE NOT NULL,
+    name VARCHAR(20) UNIQUE NOT NULL
 );
 
 CREATE TABLE teachers (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(30) UNIQUE NOT NULL,
+    name VARCHAR(30) UNIQUE NOT NULL
 );
 
 CREATE TABLE subjects (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(20) UNIQUE NOT NULL,
+    teacher_id INTEGER,
     FOREIGN KEY (teacher_id) REFERENCES teachers (id)
       ON DELETE SET NULL
       ON UPDATE CASCADE
@@ -27,7 +29,9 @@ CREATE TABLE subjects (
 CREATE TABLE scoreboard (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     mark INTEGER,
-    date_ DATE NOT NULL
+    date_ DATE NOT NULL,
+    subject_id INTEGER,
+    student_id INTEGER,
     FOREIGN KEY (subject_id) REFERENCES subjects (id)
       ON DELETE SET NULL
       ON UPDATE CASCADE
