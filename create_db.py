@@ -6,7 +6,7 @@ def create_db():
         sql = f.read()
 
     # створюємо з'єднання з БД (якщо файлу з БД немає, він буде створений)
-    with sqlite3.connect('salary.db') as con:
+    with sqlite3.connect('university.db') as con:
         cur = con.cursor()
         # виконуємо скрипт із файлу, який створить таблиці в БД
         cur.executescript(sql)
