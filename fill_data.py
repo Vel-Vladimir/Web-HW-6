@@ -9,26 +9,26 @@ NUMBER_GROUPS = 3
 NUMBER_SUBJECTS = 7
 
 
-def generate_fake_data(number_teachers, number_students, number_groups) -> tuple():
-    fake_companies = []  # тут зберігатимемо компанії
-    fake_employees = []  # тут зберігатимемо співробітників
-    fake_posts = []  # тут зберігатимемо посади
-    '''Візьмемо три компанії з faker і помістимо їх у потрібну змінну'''
+def generate_fake_data(number_students, number_teachers, number_subjects, number_groups) -> tuple():
+    fake_students = []
+    fake_teachers = []
+    fake_subjects = []
+    fake_groups = []
     fake_data = faker.Faker()
 
-    # Створимо набір компаній у кількості number_companies
-    for _ in range(number_companies):
-        fake_companies.append(fake_data.company())
+    for _ in range(number_students):
+        fake_students.append(fake_data.name())
 
-    # Згенеруємо тепер number_employees кількість співробітників'''
-    for _ in range(number_employees):
-        fake_employees.append(fake_data.name())
+    for _ in range(number_teachers):
+        fake_teachers.append(fake_data.name())
 
-    # Та number_post набір посад
-    for _ in range(number_post):
-        fake_posts.append(fake_data.job())
+    for _ in range(number_subjects):
+        fake_subjects.append(fake_data.word())
 
-    return fake_companies, fake_employees, fake_posts
+    for _ in range(number_groups):
+        fake_groups.append(fake_data.word())
+
+    return fake_students, fake_teachers, fake_subjects, fake_groups
 
 
 def prepare_data(companies, employees, posts) -> tuple():
@@ -104,3 +104,9 @@ def insert_data_to_db(companies, employees, payments) -> None:
         # Фіксуємо наші зміни в БД
 
         con.commit()
+
+if __name__ == "__main__":
+    students, teachers, subjects, groups = generate_fake_data(NUMBER_STUDENTS, NUMBER_TEACHERS, NUMBER_SUBJECTS, NUMBER_GROUPS)
+    print(students)
+    print(teachers)
+    print(groups)
